@@ -16,6 +16,14 @@ PLAYER_SYMBOL = {
   2 => 'o'
 }.freeze
 
+def clear
+  if Gem.win_platform?
+    system 'cls'
+  else
+    system 'clear'
+  end
+end
+
 # The game board
 class Board
   attr_reader :boxes
@@ -106,6 +114,7 @@ class TicTacToe
     loop do
       row = player_input(player, 'row')
       column = player_input(player, 'column')
+      clear
       if board.box_is_empty?(row, column)
         board.set_box(PLAYER_SYMBOL[player], row, column)
         board.display
